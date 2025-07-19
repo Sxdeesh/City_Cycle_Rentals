@@ -45,7 +45,8 @@
             android:gravity="left"
             android:text="Email : "
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp">
+        </TextView>
 
         <EditText
             android:id="@+id/etusername"
@@ -54,7 +55,8 @@
             android:background="@drawable/rounded_et"
             android:fontFamily="@font/poppins"
             android:hint="Enter your username"
-            android:textSize="20sp"></EditText>
+            android:textSize="20sp">
+        </EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -78,7 +80,8 @@
             android:gravity="left"
             android:text="Password : "
             android:textColor="@color/white"
-            android:textSize="20sp"></TextView>
+            android:textSize="20sp">
+        </TextView>
 
         <EditText
             android:id="@+id/etloginpw"
@@ -88,7 +91,9 @@
             android:fontFamily="@font/poppins"
             android:hint="Enter your password"
             android:inputType="textPassword"
-            android:textSize="20sp"></EditText>
+            android:textSize="20sp">
+        </EditText>
+
     </LinearLayout>
 
     <Button

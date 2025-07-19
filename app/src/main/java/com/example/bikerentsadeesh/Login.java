@@ -33,7 +33,6 @@ public class Login extends AppCompatActivity {
             return insets;
         });
 
-        // Check if user is already logged in
         checkIfUserLoggedIn();
 
         etEmail = findViewById(R.id.etusername);
@@ -53,26 +52,21 @@ public class Login extends AppCompatActivity {
             if (dbHelper.checkUser(email, password)){
                 String username = dbHelper.getUsernameByEmail(email);
 
-                // Save user credentials for auto-login
                 saveUserCredentials(username, email);
 
-                // Check if this is the first login
                 SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
                 boolean isFirstLogin = sharedPreferences.getBoolean("isFirstLogin", true);
 
                 if (isFirstLogin) {
-                    // Mark that first login is complete
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("isFirstLogin", false);
                     editor.apply();
 
                     Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 
-                    // For first login, show welcome page
                     Intent intent = new Intent(Login.this, WelcomeActivity.class);
                     startActivity(intent);
                 } else {
-                    // For subsequent logins, go directly to HomeActivity
                     Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(Login.this, HomeActivity.class);
                     startActivity(intent);
@@ -113,7 +107,6 @@ public class Login extends AppCompatActivity {
         editor.apply();
     }
 
-    // Method to clear user session (call this when user logs out)
     public static void clearUserSession(android.content.Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("UserPreferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

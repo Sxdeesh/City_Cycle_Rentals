@@ -6,4 +6,5 @@
     <color name="secondary">#A0BEBA</color>
     <color name="grey">#BDBDBD</color>
     <color name="third">#FDC1A0</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>
