@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:layout_margin="10dp"
+    android:elevation="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="#EFEFEF">
+
+        <ImageView
+            android:id="@+id/ivBikeImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/mountain_bike"
+            android:layout_marginTop="10dp"/>
+        <TextView
+            android:fontFamily="@font/poppins"
+            android:id="@+id/tvSuggestionName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bike type"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

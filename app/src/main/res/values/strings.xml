@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Bike Rent Sadeesh</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="Bike_type">
+        <item value="Select a bike type" />
+        <item value="Mountain Bike" />
+        <item value="Road Bike" />
+        <item value="Hybrid Bike" />
+        <item value="Electric Bike" />
+        <item value="City Bike" />
+        <item value="Folding Bike" />
+        <item value="Cargo Bike" />
+        <item value="BMX Bike" />
+        <item value="Track Bike" />
+        <item value="Touring Bike" />
+    </string-array>
+
+</resources>
+
