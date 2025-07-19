@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeFragment"
-    android:background="#00FFFFFF">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="#00FFFFFF">
+        android:background="@color/secondary">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,17 +85,18 @@
                             android:textColor="@color/black"
                             android:layout_gravity="left"
                             android:gravity="left"/>
+
                         <TextView
                             android:id="@+id/tvViewAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="view all"
-                            android:gravity="end"
-                            android:fontFamily="@font/poppins"
                             android:layout_gravity="center_vertical"
-                            android:textSize="16sp"
                             android:drawableEnd="@drawable/baseline_arrow_forward_ios_16"
-                            android:drawablePadding="10dp"/>
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:gravity="end"
+                            android:text="view all"
+                            android:textSize="16sp" />
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvSuggestions"

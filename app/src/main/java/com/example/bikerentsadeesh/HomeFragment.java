@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ public class HomeFragment extends Fragment {
     private List<Services> services;
     private RecyclerView rvSuggestions, rvServices;
     private SuggestionsAdapter suggestionsAdapter;
+    private TextView tvViewAll;
     private ServicesAdapter servicesAdapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,14 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         rvSuggestions=view.findViewById(R.id.rvSuggestions);
         rvServices=view.findViewById(R.id.rvServices);
+        tvViewAll = view.findViewById(R.id.tvViewAll);
+        tvViewAll.setOnClickListener(view1 -> {
+            Fragment fragment = new SearchFragment();
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.frameLayout, fragment).addToBackStack(null).commit();
+        });
+
         suggestions = new ArrayList<>();
         services = new ArrayList<>();
         for (int i =0; i<1; i++){

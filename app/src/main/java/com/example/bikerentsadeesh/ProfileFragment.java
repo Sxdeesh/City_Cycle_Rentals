@@ -41,7 +41,6 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         dbHelper = new DBHelper(requireContext());
 
-        // Set up logout button click listener
         btnLogout.setOnClickListener(v -> logout());
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPreferences", requireActivity().MODE_PRIVATE);
@@ -63,18 +62,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void logout() {
-        // Clear user session data
         Login.clearUserSession(requireContext());
 
-        // Show logout message
         Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
 
-        // Redirect to Login activity
         Intent intent = new Intent(requireActivity(), Login.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
 
-        // Finish the current activity to prevent back navigation
         requireActivity().finish();
     }
 
