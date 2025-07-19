@@ -8,13 +8,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ProfileFragment extends Fragment {
 
     private TextView tvEmail, tvUsername, tvActivity;
     private ImageView ivProfileImage;
+    private Button btnLogout;
     private DBHelper dbHelper;
 
     @Override
@@ -35,8 +38,11 @@ public class ProfileFragment extends Fragment {
         tvUsername = view.findViewById(R.id.tvUsername);
         tvEmail = view.findViewById(R.id.tvEmail);
         ivProfileImage = view.findViewById(R.id.ivProfileImage);
+        btnLogout = view.findViewById(R.id.btnLogout);
         dbHelper = new DBHelper(requireContext());
 
+        // Set up logout button click listener
+        btnLogout.setOnClickListener(v -> logout());
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("UserPreferences", requireActivity().MODE_PRIVATE);
         String username = sharedPreferences.getString("username", "User");
@@ -54,12 +60,29 @@ public class ProfileFragment extends Fragment {
 
         tvUsername.setText(username);
         tvEmail.setText(email);
-
     }
+
+    private void logout() {
+        // Clear user session data
+        Login.clearUserSession(requireContext());
+
+        // Show logout message
+        Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
+
+        // Redirect to Login activity
+        Intent intent = new Intent(requireActivity(), Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
+        // Finish the current activity to prevent back navigation
+        requireActivity().finish();
+    }
+
     private void openEditProfile() {
         Intent intent = new Intent(getActivity(), Edit_profile_details.class);
         startActivity(intent);
     }
+
     private void openCart(){
         Intent intent = new Intent(getActivity(), CartActivity.class);
         startActivity(intent);
@@ -74,6 +97,4 @@ public class ProfileFragment extends Fragment {
         TextView tvUsername = getView().findViewById(R.id.tvUsername);
         tvUsername.setText(updatedUsername);
     }
-
-
 }

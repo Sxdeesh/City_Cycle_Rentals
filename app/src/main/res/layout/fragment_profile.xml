@@ -229,6 +229,18 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="#E74040"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins"
+                android:layout_marginTop="20dp"/>
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

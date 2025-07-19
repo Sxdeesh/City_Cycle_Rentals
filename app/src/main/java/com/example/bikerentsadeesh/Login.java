@@ -32,6 +32,10 @@ public class Login extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Check if user is already logged in
+        checkIfUserLoggedIn();
+
         etEmail = findViewById(R.id.etusername);
         etPassword = findViewById(R.id.etloginpw);
         btnLogin = findViewById(R.id.btnlogin);
@@ -44,32 +48,76 @@ public class Login extends AppCompatActivity {
 
             if (email.isEmpty() || password.isEmpty()){
                 Toast.makeText(this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                return;
             }
             if (dbHelper.checkUser(email, password)){
-                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
-
                 String username = dbHelper.getUsernameByEmail(email);
 
-                SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", username);
-                editor.putString("email", email);
-                editor.apply();
+                // Save user credentials for auto-login
+                saveUserCredentials(username, email);
 
-                Intent intent = new Intent(Login.this, WelcomeActivity.class);
-                startActivity(intent);
+                // Check if this is the first login
+                SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+                boolean isFirstLogin = sharedPreferences.getBoolean("isFirstLogin", true);
+
+                if (isFirstLogin) {
+                    // Mark that first login is complete
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putBoolean("isFirstLogin", false);
+                    editor.apply();
+
+                    Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+
+                    // For first login, show welcome page
+                    Intent intent = new Intent(Login.this, WelcomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    // For subsequent logins, go directly to HomeActivity
+                    Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Login.this, HomeActivity.class);
+                    startActivity(intent);
+                }
                 finish();
             }
             else {
                 Toast.makeText(this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
             }
-
         });
 
         tvRegister.setOnClickListener(view -> {
             Intent intent = new Intent(Login.this, Register.class);
             startActivity(intent);
         });
+    }
 
+    private void checkIfUserLoggedIn() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        String savedUsername = sharedPreferences.getString("username", null);
+        String savedEmail = sharedPreferences.getString("email", null);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        // If user credentials exist and user is marked as logged in, redirect to HomeActivity
+        if (savedUsername != null && savedEmail != null && isLoggedIn) {
+            Intent intent = new Intent(Login.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private void saveUserCredentials(String username, String email) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("username", username);
+        editor.putString("email", email);
+        editor.putBoolean("isLoggedIn", true); // Mark user as logged in
+        editor.apply();
+    }
+
+    // Method to clear user session (call this when user logs out)
+    public static void clearUserSession(android.content.Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear(); // Clear all stored data
+        editor.apply();
     }
 }

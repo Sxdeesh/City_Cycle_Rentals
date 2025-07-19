@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:layout_marginTop="30dp"
+        android:padding="20dp"
         android:gravity="center_vertical"
-        android:elevation="4dp"
         android:background="@color/white">
 
         <ImageView
@@ -24,7 +24,8 @@
             android:layout_height="24dp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             android:contentDescription="Back"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="12dp"/>
 
         <TextView
             android:layout_width="0dp"
@@ -74,7 +75,6 @@
                         android:background="@drawable/profile_image"
                         android:clipToOutline="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/animated"
                         android:elevation="2dp" />
 
                     <LinearLayout
@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:text="email@example.com"
                             android:fontFamily="@font/poppins"
-                            android:textSize="16sp"
+                            android:textSize="12sp"
                             android:textColor="#616161" />
 
                     </LinearLayout>
@@ -130,7 +130,7 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/gallery"
+                        android:src="@drawable/info"
                         android:layout_marginEnd="12dp"
                         />
 
@@ -153,6 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:text="Change Photo"
+                android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/poppins"
@@ -167,6 +168,7 @@
                 android:id="@+id/btnSave"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:textAllCaps="false"
                 android:text="Save Changes"
                 android:textSize="16sp"
                 android:textStyle="bold"

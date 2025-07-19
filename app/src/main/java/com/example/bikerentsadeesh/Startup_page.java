@@ -1,6 +1,7 @@
 package com.example.bikerentsadeesh;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -18,6 +19,9 @@ public class Startup_page extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_startup_page);
 
+        // Check if user is already logged in
+        checkIfUserLoggedIn();
+
         Button btngogreen = findViewById(R.id.btngogreen);
 
         btngogreen.setOnClickListener(v -> {
@@ -30,5 +34,20 @@ public class Startup_page extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void checkIfUserLoggedIn() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        String savedUsername = sharedPreferences.getString("username", null);
+        String savedEmail = sharedPreferences.getString("email", null);
+        boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
+
+        // If user credentials exist and user is marked as logged in,
+        // skip startup page and go directly to HomeActivity
+        if (savedUsername != null && savedEmail != null && isLoggedIn) {
+            Intent intent = new Intent(Startup_page.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
